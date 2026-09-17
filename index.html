@@ -3,38 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#FF5E04">
+<meta name="theme-color" content="#08090B">
 <title>ORIS Club — Links</title>
 <meta name="description" content="ORIS Club — cadastro, comunidades oficiais, tutoriais e suporte.">
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0E0F11;
-    --panel:#151619;
-    --line:#26282C;
-    --orange:#FF5E04;
-    --orange-deep:#B33F00;
-    --text:#F2F0EC;
-    --muted:#8A8F98;
-    --mono:'IBM Plex Mono',monospace;
-    --display:'Archivo',sans-serif;
+    --bg:#08090B;
+    --panel:rgba(255,255,255,.045);
+    --panel-hover:rgba(255,255,255,.075);
+    --line:rgba(255,255,255,.09);
+    --orange:#FF5900;
+    --text:#F5F6F7;
+    --muted:#9AA1AC;
+    --muted-dim:#6B7280;
+    --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
   body{
-    background:var(--bg);
-    color:var(--text);
-    font-family:var(--display);
-    min-height:100dvh;
-    /* grid de fundo */
+    background-color:var(--bg);
     background-image:
-      linear-gradient(var(--line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--line) 1px, transparent 1px);
-    background-size:56px 56px;
-    background-position:center top;
+      radial-gradient(circle at 82% 4%, rgba(255,89,0,.24), transparent 34%),
+      radial-gradient(circle at 6% 96%, rgba(255,89,0,.10), transparent 30%),
+      linear-gradient(160deg, #140a04 0%, #08090B 42%, #0B0D11 100%);
+    background-repeat:no-repeat;
+    background-size:cover;
+    color:var(--text);
+    font-family:var(--font);
+    min-height:100dvh;
   }
   .wrap{
     max-width:440px;
@@ -53,7 +50,7 @@
     padding:4px 2px 18px;
   }
   .logo{
-    height:34px;
+    height:32px;
     width:auto;
     display:block;
   }
@@ -62,63 +59,66 @@
     gap:6px;
   }
   .lang button{
-    font-family:var(--mono);
-    font-size:11px;
+    font-family:var(--font);
+    font-size:12px;
     font-weight:600;
-    letter-spacing:.08em;
     width:34px;height:34px;
-    background:transparent;
+    border-radius:999px;
+    background:rgba(255,255,255,.05);
     color:var(--muted);
     border:1px solid var(--line);
     cursor:pointer;
     transition:all .15s ease;
   }
-  .lang button:hover{border-color:var(--orange);color:var(--text)}
+  .lang button:hover{border-color:rgba(255,89,0,.5);color:var(--text);background:rgba(255,255,255,.08)}
   .lang button.on{
     background:var(--orange);
     border-color:var(--orange);
-    color:var(--bg);
+    color:#150900;
   }
   .lang button:focus-visible,
   a:focus-visible{outline:2px solid var(--orange);outline-offset:2px}
 
-  /* ===== HERO / CORTE DIAGONAL ===== */
+  /* ===== HERO ===== */
   .hero{
-    position:relative;
-    background:var(--orange);
-    clip-path:polygon(0 0, 100% 0, 100% calc(100% - 34px), 0 100%);
-    padding:26px 22px 52px;
-    color:var(--bg);
-    overflow:hidden;
-  }
-  /* textura hachurada */
-  .hero::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:repeating-linear-gradient(
-      -45deg,
-      rgba(14,15,17,.12) 0 2px,
-      transparent 2px 9px
-    );
-    pointer-events:none;
+    padding:30px 2px 26px;
+    color:var(--text);
   }
   .hero .tag{
-    font-family:var(--mono);
-    font-size:10.5px;
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    font-size:12px;
     font-weight:600;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    opacity:.85;
-    margin-bottom:10px;
+    letter-spacing:.01em;
+    color:var(--text);
+    background:rgba(255,255,255,.07);
+    border:1px solid rgba(255,255,255,.12);
+    padding:6px 14px 6px 12px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  .hero .tag::before{
+    content:"";
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--orange);
+    flex-shrink:0;
   }
   .hero h1{
-    font-weight:900;
-    font-size:clamp(23px,6.6vw,29px);
-    line-height:1.1;
-    text-transform:uppercase;
-    letter-spacing:-.01em;
-    max-width:21ch;
+    font-weight:800;
+    font-size:clamp(28px,7.6vw,38px);
+    line-height:1.14;
+    letter-spacing:-.02em;
+    max-width:16ch;
+  }
+  .hero-sub{
+    margin-top:14px;
+    font-size:14.5px;
+    line-height:1.5;
+    color:var(--muted);
+    max-width:36ch;
+    font-weight:400;
   }
 
   /* ===== BOTÃO HERÓI ===== */
@@ -128,84 +128,95 @@
     align-items:center;
     justify-content:space-between;
     gap:14px;
-    background:var(--text);
-    color:var(--bg);
+    background:var(--orange);
+    color:#150900;
     text-decoration:none;
     padding:18px 20px;
-    margin:-26px 10px 26px;
-    border:1px solid var(--bg);
-    box-shadow:6px 6px 0 var(--bg);
-    transition:transform .15s ease, box-shadow .15s ease;
-    z-index:2;
+    margin:4px 0 28px;
+    border-radius:16px;
+    box-shadow:0 10px 26px rgba(255,89,0,.26), inset 0 1px 0 rgba(255,255,255,.22);
+    transition:transform .15s ease, box-shadow .15s ease, filter .15s ease;
   }
-  .cta:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--bg)}
-  .cta:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--bg)}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(255,89,0,.34), inset 0 1px 0 rgba(255,255,255,.22)}
+  .cta:active{transform:translateY(0);filter:brightness(.97)}
   .cta .t{
     font-weight:800;
-    font-size:17px;
-    text-transform:uppercase;
-    letter-spacing:.02em;
+    font-size:16.5px;
+    letter-spacing:-.005em;
   }
   .cta .s{
-    font-family:var(--mono);
-    font-size:10.5px;
-    color:#3C3F45;
+    font-size:12px;
+    color:rgba(21,9,0,.65);
     margin-top:3px;
+    font-weight:500;
   }
   .cta .arrow{
-    font-family:var(--mono);
-    font-weight:600;
+    font-weight:700;
     font-size:18px;
-    color:var(--orange);
+    color:#150900;
     flex-shrink:0;
   }
+  .cta-secondary{
+    background:rgba(255,255,255,.045);
+    color:var(--text);
+    border:1px solid var(--line);
+    box-shadow:none;
+    margin:0 0 26px;
+  }
+  .cta-secondary:hover{
+    transform:translateY(-2px);
+    border-color:rgba(255,89,0,.4);
+    background:rgba(255,255,255,.07);
+    box-shadow:none;
+  }
+  .cta-secondary:active{transform:translateY(0);filter:none}
+  .cta-secondary .t{font-weight:700;font-size:15px}
+  .cta-secondary .s{color:var(--muted);font-weight:400}
+  .cta-secondary .arrow{color:var(--orange)}
 
-  /* ===== SEÇÕES DE LINKS ===== */
-  .sec{margin-bottom:22px}
-  .sec .label{
+  /* ===== MAIS OPÇÕES ===== */
+  .more{margin:2px 0 22px}
+  .more .label{
     display:flex;
     align-items:center;
     gap:10px;
-    font-family:var(--mono);
-    font-size:10px;
-    font-weight:600;
-    letter-spacing:.22em;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.1em;
     text-transform:uppercase;
-    color:var(--muted);
-    margin-bottom:10px;
+    color:var(--muted-dim);
+    margin-bottom:2px;
   }
-  .sec .label::after{
+  .more .label::after{
     content:"";
     flex:1;
     height:1px;
     background:var(--line);
   }
-  .links{display:flex;flex-direction:column;gap:8px}
-  .card{
+  .mini{
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:14px;
-    background:var(--panel);
-    border:1px solid var(--line);
     text-decoration:none;
     color:var(--text);
-    padding:15px 16px;
-    transition:border-color .15s ease, background .15s ease;
+    padding:14px 2px;
+    border-bottom:1px solid var(--line);
+    transition:opacity .15s ease;
   }
-  .card:hover{border-color:var(--orange);background:#1A1B1F}
-  .card:hover .go{transform:translateX(3px);color:var(--orange)}
-  .card .t{font-weight:700;font-size:14.5px;letter-spacing:.01em}
-  .card .s{
-    font-family:var(--mono);
-    font-size:10.5px;
+  .mini:last-child{border-bottom:none}
+  .mini:hover{opacity:.72}
+  .mini:hover .go{transform:translateX(3px);color:var(--orange)}
+  .mini .t{font-weight:600;font-size:13.5px;letter-spacing:-.005em}
+  .mini .s{
+    font-size:11.5px;
     color:var(--muted);
-    margin-top:3px;
+    margin-top:2px;
+    font-weight:400;
   }
-  .card .go{
-    font-family:var(--mono);
-    font-size:15px;
-    color:var(--muted);
+  .mini .go{
+    font-size:14px;
+    color:var(--muted-dim);
     flex-shrink:0;
     transition:transform .15s ease, color .15s ease;
   }
@@ -217,31 +228,22 @@
     text-align:center;
   }
   footer .r18{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    font-family:var(--mono);
-    font-size:10px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--muted);
-  }
-  footer .r18 b{
-    display:inline-flex;
+    display:flex;
     align-items:center;
     justify-content:center;
-    width:26px;height:26px;
-    border:1px solid var(--muted);
-    border-radius:50%;
+    gap:6px;
+    font-size:11px;
+    color:var(--muted-dim);
+  }
+  footer .r18 b{
     font-weight:600;
-    font-size:9px;
+    color:var(--muted);
   }
   footer .dom{
-    font-family:var(--mono);
-    font-size:9.5px;
-    color:#4A4E55;
-    margin-top:10px;
-    letter-spacing:.08em;
+    font-size:10.5px;
+    color:rgba(255,255,255,.22);
+    margin-top:8px;
+    letter-spacing:.04em;
   }
 
   /* ===== ENTRADA ===== */
@@ -271,6 +273,7 @@
   <div class="hero fade">
     <div class="tag" data-i="heroTag"></div>
     <h1 data-i="heroTitle"></h1>
+    <p class="hero-sub" data-i="heroSub"></p>
   </div>
 
   <a class="cta fade" id="link-registro" target="_blank" rel="noopener">
@@ -281,51 +284,31 @@
     <span class="arrow">&#8594;</span>
   </a>
 
-  <section class="sec fade">
-    <div class="label" data-i="secComunidade"></div>
-    <div class="links">
-      <a class="card" id="link-whats-comunidade" target="_blank" rel="noopener">
-        <div>
-          <div class="t" data-i="comWhatsTitle"></div>
-          <div class="s" data-i="comWhatsSub"></div>
-        </div>
-        <span class="go">&#8594;</span>
-      </a>
-      <a class="card" id="link-telegram" target="_blank" rel="noopener">
-        <div>
-          <div class="t" data-i="comTeleTitle"></div>
-          <div class="s" data-i="comTeleSub"></div>
-        </div>
-        <span class="go">&#8594;</span>
-      </a>
+  <a class="cta cta-secondary fade" id="link-whats-comunidade" target="_blank" rel="noopener">
+    <div>
+      <div class="t" data-i="secCtaTitle"></div>
+      <div class="s" data-i="secCtaSub"></div>
     </div>
-  </section>
+    <span class="arrow">&#8594;</span>
+  </a>
 
-  <section class="sec fade">
-    <div class="label" data-i="secTutoriais"></div>
-    <div class="links">
-      <a class="card" id="link-tutoriais" target="_blank" rel="noopener">
-        <div>
-          <div class="t" data-i="tutTitle"></div>
-          <div class="s" data-i="tutSub"></div>
-        </div>
-        <span class="go">&#8594;</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="sec fade">
-    <div class="label" data-i="secSuporte"></div>
-    <div class="links">
-      <a class="card" id="link-suporte" target="_blank" rel="noopener">
-        <div>
-          <div class="t" data-i="supTitle"></div>
-          <div class="s" data-i="supSub"></div>
-        </div>
-        <span class="go">&#8594;</span>
-      </a>
-    </div>
-  </section>
+  <div class="more fade">
+    <div class="label" data-i="moreLabel"></div>
+    <a class="mini" id="link-tutoriais" target="_blank" rel="noopener">
+      <div>
+        <div class="t" data-i="tutTitle"></div>
+        <div class="s" data-i="tutSub"></div>
+      </div>
+      <span class="go">&#8594;</span>
+    </a>
+    <a class="mini" id="link-suporte" target="_blank" rel="noopener">
+      <div>
+        <div class="t" data-i="supTitle"></div>
+        <div class="s" data-i="supSub"></div>
+      </div>
+      <span class="go">&#8594;</span>
+    </a>
+  </div>
 
   <footer>
     <div class="r18"><b>18+</b><span data-i="footer18"></span></div>
@@ -343,20 +326,13 @@ var UTM = "utm_source=instagram&utm_medium=bio&utm_campaign=links";
 
 var CONFIG = {
   // Cadastro (mesmo destino nos 3 idiomas)
-  registro: "https://app.orisclub.com/register?" + UTM + "&utm_content=cadastro",
+  registro: "https://app.orisclub.com/?" + UTM + "&utm_content=cadastro",
 
   // Comunidade WhatsApp — link de convite do grupo (chat.whatsapp.com/...)
   whatsComunidade: {
     pt: "https://chat.whatsapp.com/GoVEHPiM57O72G4PyDvpbK",
     es: "https://chat.whatsapp.com/GoVEHPiM57O72G4PyDvpbK",
     en: "https://chat.whatsapp.com/GoVEHPiM57O72G4PyDvpbK"
-  },
-
-  // Telegram — t.me/...
-  telegram: {
-    pt: "https://t.me/oriscluboficial",
-    es: "https://t.me/oriscluboficial",
-    en: "https://t.me/oriscluboficial"
   },
 
   // Tutoriais no Drive — um link por idioma
@@ -367,7 +343,7 @@ var CONFIG = {
   },
 
   // Suporte — número no formato internacional, só dígitos. Ex: 5585999999999
-  suporteNumero: "0",
+  suporteNumero: "639350296718",
   suporteMsg: {
     pt: "Olá! Vim pelo Instagram da ORIS e preciso de suporte.",
     es: "¡Hola! Vengo del Instagram de ORIS y necesito soporte.",
@@ -381,17 +357,14 @@ var I18N = {
   pt: {
     heroTag: "Nós não acompanhamos o mercado.",
     heroTitle: "Nós construímos o que ele vai se tornar.",
+    heroSub: "No Oris Club, oportunidade vira decisão guiada: limite, janela e acompanhamento entram no fluxo para você agir com confiança.",
     ctaTitle: "Criar minha conta",
     ctaSub: "Acesso à plataforma ORIS",
-    secComunidade: "Comunidade",
-    comWhatsTitle: "Grupo oficial no WhatsApp",
-    comWhatsSub: "Avisos e conteúdo diário",
-    comTeleTitle: "Canal oficial no Telegram",
-    comTeleSub: "Relatórios e avisos oficiais",
-    secTutoriais: "Aprenda",
+    secCtaTitle: "Entrar na comunidade",
+    secCtaSub: "Grupo oficial no WhatsApp",
+    moreLabel: "Mais opções",
     tutTitle: "Tutoriais da plataforma",
     tutSub: "Passo a passo em português",
-    secSuporte: "Suporte",
     supTitle: "Falar com o suporte",
     supSub: "WhatsApp oficial · resposta humana",
     footer18: "Jogue com responsabilidade"
@@ -399,17 +372,14 @@ var I18N = {
   es: {
     heroTag: "No seguimos el mercado.",
     heroTitle: "Construimos lo que va a ser.",
+    heroSub: "En Oris Club, la oportunidad se convierte en decisión guiada: límite, ventana y seguimiento entran en el flujo para que actúes con confianza.",
     ctaTitle: "Crear mi cuenta",
     ctaSub: "Acceso a la plataforma ORIS",
-    secComunidade: "Comunidad",
-    comWhatsTitle: "Grupo oficial de WhatsApp",
-    comWhatsSub: "Avisos y contenido diario",
-    comTeleTitle: "Canal oficial de Telegram",
-    comTeleSub: "Informes y avisos oficiales",
-    secTutoriais: "Aprende",
+    secCtaTitle: "Entrar en la comunidad",
+    secCtaSub: "Grupo oficial de WhatsApp",
+    moreLabel: "Más opciones",
     tutTitle: "Tutoriales de la plataforma",
     tutSub: "Paso a paso en español",
-    secSuporte: "Soporte",
     supTitle: "Hablar con soporte",
     supSub: "WhatsApp oficial · respuesta humana",
     footer18: "Juega con responsabilidad"
@@ -417,17 +387,14 @@ var I18N = {
   en: {
     heroTag: "We don't follow the market.",
     heroTitle: "We build what it will become.",
+    heroSub: "At Oris Club, opportunity becomes a guided decision — limit, window and tracking built into the flow so you can act with confidence.",
     ctaTitle: "Create my account",
     ctaSub: "Access the ORIS platform",
-    secComunidade: "Community",
-    comWhatsTitle: "Official WhatsApp group",
-    comWhatsSub: "Updates and daily content",
-    comTeleTitle: "Official Telegram channel",
-    comTeleSub: "Official reports and updates",
-    secTutoriais: "Learn",
+    secCtaTitle: "Join the community",
+    secCtaSub: "Official WhatsApp group",
+    moreLabel: "More options",
     tutTitle: "Platform tutorials",
     tutSub: "Step-by-step in English",
-    secSuporte: "Support",
     supTitle: "Talk to support",
     supSub: "Official WhatsApp · human reply",
     footer18: "Play responsibly"
@@ -451,7 +418,6 @@ function apply(lang){
   // destinos
   document.getElementById("link-registro").href = CONFIG.registro;
   document.getElementById("link-whats-comunidade").href = link(CONFIG.whatsComunidade[lang]);
-  document.getElementById("link-telegram").href = link(CONFIG.telegram[lang]);
   document.getElementById("link-tutoriais").href = link(CONFIG.tutoriais[lang]);
 
   var num = CONFIG.suporteNumero;
