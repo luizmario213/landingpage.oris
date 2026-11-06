@@ -359,6 +359,18 @@ var CONFIG = {
   }
 };
 
+/* ============================================================
+   SUPORTE POR AFILIADO
+   Código do afiliado -> WhatsApp de suporte dele (só dígitos, com DDI).
+   Afiliado que NÃO está nesta lista usa o suporte oficial lá de cima.
+   Para adicionar: copie uma linha, troque o código e o número, e
+   coloque vírgula no fim de todas as linhas menos a última.
+   ============================================================ */
+var SUPORTE_AFILIADOS = {
+  "01KVH5T9H0": "5511997388140"
+  // ,"OUTROCODIGO": "5585999999999"
+};
+
 /* ============================================================ */
 
 var I18N = {
@@ -434,6 +446,17 @@ function linkCadastro(){
   return comUTM(CONFIG.registro);
 }
 
+// suporte do afiliado (se estiver na lista e preenchido), senão o oficial
+function numeroSuporte(){
+  if (AFILIADO){
+    var n = SUPORTE_AFILIADOS[AFILIADO];
+    if (n === undefined) n = SUPORTE_AFILIADOS[AFILIADO.toUpperCase()];
+    if (n) n = String(n).replace(/\D/g, "");
+    if (n && n.length >= 10) return n;
+  }
+  return CONFIG.suporteNumero;
+}
+
 function link(url){
   if (!url || url.indexOf("COLOQUE_AQUI") === 0) return "#";
   return url;
@@ -453,7 +476,7 @@ function apply(lang){
   document.getElementById("link-whats-comunidade").href = link(CONFIG.whatsComunidade[lang]);
   document.getElementById("link-tutoriais").href = link(CONFIG.tutoriais[lang]);
 
-  var num = CONFIG.suporteNumero;
+  var num = numeroSuporte();
   document.getElementById("link-suporte").href =
     (num.indexOf("COLOQUE_AQUI") === 0) ? "#" :
     "https://wa.me/" + num + "?text=" + encodeURIComponent(CONFIG.suporteMsg[lang]);
