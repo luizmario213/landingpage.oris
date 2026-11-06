@@ -327,8 +327,14 @@
 var UTM = "utm_source=instagram&utm_medium=bio&utm_campaign=links";
 
 var CONFIG = {
-  // Cadastro (mesmo destino nos 3 idiomas)
-  registro: "https://app.orisclub.com/?" + UTM + "&utm_content=cadastro",
+  // Cadastro SEM afiliado (quem abre go.orisclub.club sem código)
+  registro: "https://app.orisclub.com/register",
+
+  // Cadastro COM afiliado. {codigo} é trocado pelo código do afiliado.
+  // Deixe IGUAL ao link de afiliado que a plataforma gera, só trocando o
+  // código por {codigo}. Ex.: se o link é app.orisclub.com/register?ref=ABC123
+  // fica "https://app.orisclub.com/register?ref={codigo}"
+  registroAfiliado: "https://app.orisclub.com/register?ref={codigo}",
 
   // Comunidade WhatsApp — link de convite do grupo (chat.whatsapp.com/...)
   whatsComunidade: {
@@ -403,6 +409,31 @@ var I18N = {
   }
 };
 
+/* ---------- código do afiliado ----------
+   Funciona dos dois jeitos:
+     go.orisclub.club/ABC123
+     go.orisclub.club/?ref=ABC123
+   Sem código (ou código inválido) -> cadastro normal da empresa. */
+function codigoAfiliado(){
+  var q = new URLSearchParams(location.search).get("ref");
+  var path = location.pathname.replace(/^\/+|\/+$/g, "");
+  if (path === "index.html" || path === "index") path = "";
+  var c = (q || path || "").trim();
+  return /^[A-Za-z0-9_-]{1,64}$/.test(c) ? c : "";
+}
+
+var AFILIADO = codigoAfiliado();
+
+// junta a UTM no link sem quebrar links que já têm "?"
+function comUTM(url){
+  return url + (url.indexOf("?") === -1 ? "?" : "&") + UTM + "&utm_content=cadastro";
+}
+
+function linkCadastro(){
+  if (AFILIADO) return comUTM(CONFIG.registroAfiliado.replace("{codigo}", encodeURIComponent(AFILIADO)));
+  return comUTM(CONFIG.registro);
+}
+
 function link(url){
   if (!url || url.indexOf("COLOQUE_AQUI") === 0) return "#";
   return url;
@@ -418,14 +449,14 @@ function apply(lang){
   }
 
   // destinos
-  document.getElementById("link-registro").href = CONFIG.registro;
+  document.getElementById("link-registro").href = linkCadastro();
   document.getElementById("link-whats-comunidade").href = link(CONFIG.whatsComunidade[lang]);
   document.getElementById("link-tutoriais").href = link(CONFIG.tutoriais[lang]);
 
   var num = CONFIG.suporteNumero;
   document.getElementById("link-suporte").href =
     (num.indexOf("COLOQUE_AQUI") === 0) ? "#" :
-    "https://wa.me/" + num + "?text=" + encodeURIComponent(t === I18N[lang] ? CONFIG.suporteMsg[lang] : CONFIG.suporteMsg.pt);
+    "https://wa.me/" + num + "?text=" + encodeURIComponent(CONFIG.suporteMsg[lang]);
 
   // seletor + atributo lang
   var btns = document.querySelectorAll(".lang button");
